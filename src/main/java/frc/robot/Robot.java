@@ -97,7 +97,43 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    /*
+    assignemtn 1
+    if(controller.getAButtonPressed()){
+      motor.set(0.25);
+    }
+
+    if(controller.getAButtonReleased()){
+      motor.set(0);
+    }*/
+
+    /* 
+    assignemtn 2
+    if(controller.getAButtonPressed()){
+      motor.set(0.25);
+    }
+    if(controller.getBButtonPressed()){
+      motor.set(.5);
+    }
+    if(controller.getYButtonPressed()){
+      motor.set(0);
+    }*/
+    
+    int count = 0;
+    if(controller.getAButtonPressed()){
+      if(count == 0){
+        motor.set(.25);
+      }
+      else if(count == 1){
+        motor.set(0.5);
+      }
+      else if(count == 2){
+        motor.set(0);
+        count = 0;
+      }
+    }
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
