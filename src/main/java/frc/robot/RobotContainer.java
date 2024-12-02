@@ -4,9 +4,9 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
+
 import frc.robot.commands.Autos;
-import frc.robot.commands.Drive;
+import frc.robot.commands.Turn;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,11 +22,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Drive driveCommand = new Drive(Robot.wheel);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController controller =
+      new CommandXboxController(0);
+
+  private final Turn turn180 = new Turn(Math.PI);
+  private final Turn turn90 = new Turn(Math.PI / 2);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -44,9 +47,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+    controller.a().whileTrue(turn180);
+    controller.b().whileTrue(turn90);
 
-    m_driverController.a().whileTrue(driveCommand);
+    
   }
 
   /**

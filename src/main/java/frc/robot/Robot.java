@@ -5,13 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Flywheel;
 import frc.robot.subsystems.Wheel;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,8 +22,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private final CANSparkMax motor = new CANSparkMax(0,  MotorType.kBrushless);
-  private final XboxController controller = new XboxController(0);
+  //private final CANSparkMax motor = new CANSparkMax(0,  MotorType.kBrushless);
+  //private final XboxController controller = new XboxController(0);
+  public static final Flywheel flywheel = new Flywheel();
 
   public static final Wheel wheel = new Wheel();
   /**
@@ -124,7 +123,7 @@ public class Robot extends TimedRobot {
     }*/
     
     //assignemtn 3
-    int count = 0;
+    /*int count = 0;
     if(controller.getAButtonPressed()){
       if(count == 0){
         motor.set(.25);
@@ -136,7 +135,7 @@ public class Robot extends TimedRobot {
         motor.set(0);
         count = 0;
       }
-    }
+    }*/
   }
 
   /** This function is called once when the robot is first started up. */
@@ -145,5 +144,6 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically whilst in simulation. */
   @Override
-  public void simulationPeriodic() {}
+  public void simulationPeriodic() { 
+  }
 }
