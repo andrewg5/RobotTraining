@@ -7,28 +7,37 @@ import frc.robot.Robot;
 public class Turn extends Command {
     private double setPointRad;
     private double kP = 0.29;
+
+
     public Turn(double setPointRad){
         this.setPointRad = setPointRad;
-        addRequirements(Robot.flywheel);
+        addRequirements(Robot.swerve);
     }
 
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("kP", kP);
+        //SmartDashboard.putNumber("kP", kP);
     }
-
+ 
     @Override
     public void execute() {
-        double error = setPointRad - Robot.flywheel.getPosition();
-        double proportionOutput = error * kP;
-        Robot.flywheel.setVoltage(proportionOutput);
-        SmartDashboard.putNumber("error", error / (2 * Math.PI) * 360);
+        for(int i = 0; i< 4; i++){
+            double error = setPointRad - Robot.swerve.getPosition(i);
+            double proportionOutput = error * kP;
+            Robot.swerve.setMotorVoltage(proportionOutput, i);
+            SmartDashboard.putNumber("error", error / (2 * Math.PI) * 360);
+        }
+        
+        
 
 
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.flywheel.setVoltage(0);
+        for (int i = 0; i < 4; i++) {
+            Robot.swerve.setMotorVoltage(0, i);
+        
+        }
     }
 }
